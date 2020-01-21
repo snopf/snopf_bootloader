@@ -1,0 +1,4 @@
+*.hex
+*.pyc
+.venv
+*.bin
