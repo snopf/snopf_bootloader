@@ -19,6 +19,8 @@ To program the device without root privileges you need to copy `53-snopf-boot.ru
 $ ./install_usb_rule.sh
 ```
 
+To initalize the bootloader and prevent a jump to the main application you have to press the button on the snopf device **when plugging in** and keep pressing the button for at least 10 seconds. In any other case the device will jump to the main application instead of the bootloader.
+
 After that you can send a new application to the device by running
 ```
 $ python3 update_firmwary.py hexfile
