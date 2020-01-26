@@ -199,6 +199,7 @@ static void extract_main_app_func(void)
 
 int main(void)
 {
+    io_init();
     // Button needs to be pressed for 10 sec at startup to activate bootloader
     // instead of main app
     uint8_t time;
@@ -218,6 +219,9 @@ int main(void)
     
     // The firmware update process starts from here
     
+    // Signal that the bootloader is running
+    IO_LED_ON;
+    
     // write the bootloaders isr jmps into the mcu's isr vector table
     insert_bootloader_isr();
     
@@ -226,8 +230,6 @@ int main(void)
     usbDeviceDisconnect();
     _delay_ms(500);
     usbDeviceConnect();
-    
-    io_btt_deactivate();
 
     sei();
     
@@ -246,9 +248,9 @@ int main(void)
     cli();
     // signal that we are done    
     for (uint8_t i = 0; i < 5; i++) {
-        io_btt_activate();
+        IO_LED_OFF;
         _delay_ms(500);
-        io_btt_deactivate();
+        IO_LED_ON;
         _delay_ms(500);
     }
 
