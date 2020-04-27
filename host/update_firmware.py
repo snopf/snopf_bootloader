@@ -11,9 +11,8 @@ import time
 import struct
 import numpy as np
 
-VENDOR_ID = 0x16c0
-PRODUCT_ID = 0x27d8
-SERIAL_ID = 'snopf.com:boot'
+VENDOR_ID = 0x1209
+PRODUCT_ID = 0x7371
 
 PAGE_SIZE = 64
 
@@ -97,8 +96,7 @@ def create_bin_file_from_hex(fname):
 if __name__ == '__main__':
     create_bin_file_from_hex(sys.argv[1])
     
-    device = usb.core.find(idVendor=VENDOR_ID, idProduct=PRODUCT_ID,
-                           serial_number=SERIAL_ID)
+    device = usb.core.find(idVendor=VENDOR_ID, idProduct=PRODUCT_ID)
     
     updater = Updater(device)
     updater.start_update()
